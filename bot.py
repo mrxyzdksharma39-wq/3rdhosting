@@ -1,4 +1,4 @@
-# Original credits: @CXXWIO / @SHIVAA4A1
+# Original credits: @Mrdk_Sharma_07
 # Original menus and premium emoji retained; unsafe execution paths repaired.
 import contextlib
 import logging
