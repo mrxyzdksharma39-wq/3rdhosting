@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: dk-hosting
+    runtime: python
+    plan: free
+    buildCommand: python -m pip install -r requirements.txt && python -m pip check
+    startCommand: python bot.py
+    healthCheckPath: /healthz
+    envVars:
+      - key: HOST_BOT_TOKEN
+        sync: false
+      - key: OWNER_ID
+        sync: false
+      - key: ALLOW_UNSANDBOXED_EXECUTION
+        value: "false"
+      - key: DATA_DIR
+        value: user_files_v2
+    # One instance only. Do not scale or run overlapping polling instances.
+    # Free service storage is ephemeral. This blueprint is for trusted-code trials.

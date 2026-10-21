@@ -1,0 +1,89 @@
+FINAL OFFLINE REGRESSION RUN
+
+test_actual_file_directory_permissions (test_hosting.CoreTests.test_actual_file_directory_permissions) ... ok
+test_atomic_duplicate_start_race (test_hosting.CoreTests.test_atomic_duplicate_start_race) ... ok
+test_cli_config_missing_invalid_valid (test_hosting.CoreTests.test_cli_config_missing_invalid_valid) ... ok
+test_config_change_running_blocked (test_hosting.CoreTests.test_config_change_running_blocked) ... ok
+test_duplicate_account_across_projects (test_hosting.CoreTests.test_duplicate_account_across_projects) ... ok
+test_env_quotes_comments_and_invalid (test_hosting.CoreTests.test_env_quotes_comments_and_invalid) ... ok
+test_execution_opt_in (test_hosting.CoreTests.test_execution_opt_in) ... ok
+test_health_bind_response_and_conflict (test_hosting.CoreTests.test_health_bind_response_and_conflict) ... ok
+test_host_account_rejected (test_hosting.CoreTests.test_host_account_rejected) ... ok
+test_invalid_filenames_and_uploads (test_hosting.CoreTests.test_invalid_filenames_and_uploads) ... ok
+test_logs_bounded (test_hosting.CoreTests.test_logs_bounded) ... ok
+test_missing_dependency_runtime (test_hosting.CoreTests.test_missing_dependency_runtime) ... ok
+test_missing_token_never_falls_back (test_hosting.CoreTests.test_missing_token_never_falls_back) ... ok
+test_ordinary_child_process_cleanup (test_hosting.CoreTests.test_ordinary_child_process_cleanup) ... ok
+test_persistence_and_no_silent_reset (test_hosting.CoreTests.test_persistence_and_no_silent_reset) ... ok
+test_pip_failure_and_log_capture (test_hosting.CoreTests.test_pip_failure_and_log_capture) ... ok
+test_real_venv_install_empty_requirements (test_hosting.CoreTests.test_real_venv_install_empty_requirements) ... ok
+test_reject_stops_and_blocks_user (test_hosting.CoreTests.test_reject_stops_and_blocks_user) ... ok
+test_saved_running_state_restore_and_stopped_stays_stopped (test_hosting.CoreTests.test_saved_running_state_restore_and_stopped_stays_stopped) ... ok
+test_settings_missing_and_invalid (test_hosting.CoreTests.test_settings_missing_and_invalid) ... ok
+test_settings_valid_dummy (test_hosting.CoreTests.test_settings_valid_dummy) ... ok
+test_single_instance_lock (test_hosting.CoreTests.test_single_instance_lock) ... ok
+test_start_stop_restart_and_redaction (test_hosting.CoreTests.test_start_stop_restart_and_redaction) ... ok
+test_token_isolation_real_subprocess (test_hosting.CoreTests.test_token_isolation_real_subprocess) ... ok
+test_unwritable_storage_injected (test_hosting.CoreTests.test_unwritable_storage_injected) ... ok
+test_upload_limit_and_owner_exemption (test_hosting.CoreTests.test_upload_limit_and_owner_exemption) ... ok
+test_user_separation_and_approval (test_hosting.CoreTests.test_user_separation_and_approval) ... ok
+test_zip_duplicate (test_hosting.CoreTests.test_zip_duplicate) ... ok
+test_zip_expansion_limit (test_hosting.CoreTests.test_zip_expansion_limit) ... ok
+test_zip_missing_ambiguous_entry (test_hosting.CoreTests.test_zip_missing_ambiguous_entry) ... ok
+test_zip_normal_wrapper_and_cwd (test_hosting.CoreTests.test_zip_normal_wrapper_and_cwd) ... ok
+test_zip_symlink (test_hosting.CoreTests.test_zip_symlink) ... ok
+test_zip_traversal_absolute_backslash_reserved (test_hosting.CoreTests.test_zip_traversal_absolute_backslash_reserved) ... ok
+test_all_top_level_menus (test_hosting.UIContractTests.test_all_top_level_menus) ... ok
+test_callback_payload_lengths (test_hosting.UIContractTests.test_callback_payload_lengths) ... ok
+test_document_project_config_and_callback_ownership (test_hosting.UIContractTests.test_document_project_config_and_callback_ownership) ... ok
+test_group_ignored_and_owner_enforced (test_hosting.UIContractTests.test_group_ignored_and_owner_enforced) ... ok
+test_main_mock_transport_startup_and_cleanup (test_hosting.UIContractTests.test_main_mock_transport_startup_and_cleanup) ... ok
+test_start_approval_and_menu (test_hosting.UIContractTests.test_start_approval_and_menu) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 18.631s
+
+OK
+Hosting bot authenticated; health endpoint active. Restoring saved running state.
+
+
+SUPPLEMENTAL CHECKS (Render DATA_DIR subsequently changed to user_files_v2)
+
+SYNTAX: True
+STATIC GLOBAL REFERENCE CHECK bot.py []
+REVIEW INVENTORY bot.py lines 493 top level definitions 17 no duplicate top-level definitions
+STATIC GLOBAL REFERENCE CHECK hosting.py []
+REVIEW INVENTORY hosting.py lines 593 top level definitions 10 no duplicate top-level definitions
+STATIC GLOBAL REFERENCE CHECK test_hosting.py []
+REVIEW INVENTORY test_hosting.py lines 358 top level definitions 7 no duplicate top-level definitions
+VALID REQUIREMENT: pyTelegramBotAPI==4.29.1
+VALID REQUIREMENT: psutil==7.0.0
+CLEAN HOST ENVIRONMENT CREATED: 0
+HOST DEPENDENCY INSTALL OFFLINE EXIT: 1
+ ERROR: Could not find a version that satisfies the requirement pyTelegramBotAPI==4.29.1 (from versions: none)
+ERROR: No matching distribution found for pyTelegramBotAPI==4.29.1
+
+HOST OS UID: 1000
+CHILD OS UID: 1000
+SAME UID, NO OS SANDBOX: True
+EXPOSED ORIGINAL TOKEN IN DELIVERY: 0
+RENDER CONFIG: services:
+  - type: web
+    name: dk-hosting
+    runtime: python
+    plan: free
+    buildCommand: python -m pip install -r requirements.txt && python -m pip check
+    startCommand: python bot.py
+    healthCheckPath: /healthz
+    envVars:
+      - key: HOST_BOT_TOKEN
+        sync: false
+      - key: OWNER_ID
+        sync: false
+      - key: ALLOW_UNSANDBOXED_EXECUTION
+        value: "false"
+      - key: DATA_DIR
+        value: user_files
+    # One instance only. Do not scale or run overlapping polling instances.
+    # Free service storage is ephemeral. This blueprint is for trusted-code trials.
+
